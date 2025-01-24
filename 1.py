@@ -31,7 +31,7 @@ for link in urls:
     time.sleep(sleeptime)
 
 print(Errors)
-link1 = https://discord.com/api/v9/channels/1300080115945836696/messages
+link1 = "https://discord.com/api/v9/channels/1300080115945836696/messages"
 header1 = {"Authorization": TOKEN1}
 payload1 = {"content": Errors}
 res = requests.post(link1, data=payload1, headers=header1)
