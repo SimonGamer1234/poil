@@ -24,7 +24,7 @@ for ID in IDS:
         print(f"Posted to {link} : {res.status_code}")  # Print response status
         print(res.text)
         if res.status_code != 200:
-            Errors.append((link,res.status_code,token_index,"Normal"))
+            Errors.append((link,res.status_code,"Normal"))
         if res.status_code == 401:
             unauthorized = 1
         if res.status_code == 200:
