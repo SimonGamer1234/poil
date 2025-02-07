@@ -12,7 +12,7 @@ Errors = []
 IDS = IDSlist.split(',')
 Successful = 0
 
-header = {"Authorization": Token}
+header = {"Authorization": TOKEN1}
 payload = {"content": CurrentAd}
 unauthorized = 0
 # Loop through the links and make POST requests
