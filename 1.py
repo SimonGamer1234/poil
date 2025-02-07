@@ -6,10 +6,10 @@ import json
 
 # Retrieve the environment variables
 AD1 = os.getenv("REPO_VAR_1")  
-IDS = os.getenv("URLS")
+IDSlist = os.getenv("URLS")
 TOKEN1 = os.getenv("TOKEN_SCRT_1")
 Errors = []
-urls = URLS.split(',')
+IDS = IDSlist.split(',')
 Successful = 0
 
 header = {"Authorization": Token}
