@@ -13,7 +13,7 @@ IDS = IDSlist.split(',')
 Successful = 0
 
 header = {"Authorization": TOKEN1}
-payload = {"content": CurrentAd}
+payload = {"content": AD1}
 unauthorized = 0
 # Loop through the links and make POST requests
 for ID in IDS:
