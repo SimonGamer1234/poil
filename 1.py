@@ -6,7 +6,7 @@ import json
 
 # Retrieve the environment variables
 AD1 = os.getenv("REPO_VAR_1")  
-URLS = os.getenv("URLS")
+IDS = os.getenv("URLS")
 TOKEN1 = os.getenv("TOKEN_SCRT_1")
 Errors = []
 urls = URLS.split(',')
@@ -16,7 +16,8 @@ header = {"Authorization": Token}
 payload = {"content": CurrentAd}
 unauthorized = 0
 # Loop through the links and make POST requests
-for link in urls:
+for ID in IDS:
+    link = f"https://discord.com/api/v9/channels/{ID}/messages"
     sleeptime = random.uniform(2, 3)
     try:
         res = requests.post(link, data=payload, headers=header)
@@ -37,7 +38,7 @@ print(unauthorized)
 if unauthorized == 1:
     CONTENT = f"TOKEN 1 UNAUTHORIZED - Normal - <@1148657062599983237>"
 else:
-    CONTENT = f"Succesfully posted: {Successful}, Errors: {str(Errors)}
+    CONTENT = f"Succesfully posted: {Successful}, Errors: {str(Errors)}"
 print(CONTENT)
 link1 = "https://discord.com/api/v9/channels/1300080115945836696/messages"
 header1 = {"Authorization": TOKEN1}
