@@ -95,10 +95,3 @@ def run_script():
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    data = request.get_json()
-    print("Webhook triggered!", data)
-    return str(data), 200
-
-
