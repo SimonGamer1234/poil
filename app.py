@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route('/run', methods=['POST'])
 def run_script():
     # Your script logic here (call function, run something, etc.)
-    data = request.json  # optional
+    data = request.response  # optional
     print("Webhook triggered!", data)
     return jsonify(data), 200
 
