@@ -90,7 +90,7 @@ def run_script():
         "Variables": Thing,
         "DisMessage": f"Your Choices:\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nMessage: {Message}\n\nPick the variables you want to replace:\n{Thing}",
     }
-    return str(response), 200  # Using jsonify to ensure proper JSON response
+    return response, 200  # Using jsonify to ensure proper JSON response
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
