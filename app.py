@@ -152,9 +152,8 @@ def webhook():
                     print(t)
             page += 1
         return V_Names, V_Values, Scheduler_Value, newtable
-    
+    Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
     if PostedBefore == True:
-        Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
         def GetGuildIds(IDS):
             ids = [id.strip() for id in str(IDS).split(",")]
             GuildIds = []
