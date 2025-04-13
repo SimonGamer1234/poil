@@ -209,7 +209,7 @@ def webhook():
                 Posts = 1400
             elif Variation == "God's":
                 Posts = 2100
-            TotalPosts = int(int(input("How many total posts?")) + int(totalposts))
+            TotalPosts = Posts + int(totalposts)
             Final_Variable = f"{Message}\n=divider=\n{TotalPosts}\n=divider=\n{Days}\n=divider=\n{Keywords}"
             return Final_Variable
         Final_Variable = CreateVariable(totalposts, Keywords)
@@ -230,3 +230,41 @@ def webhook():
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
         UpdateVariables(Final_Variable, Names, WhichVar, REPO)
         print("Webhook triggered!", data)
+    elif PostedBefore == False:
+        def CreateVariable(Keywords):
+            if Variation == "Free Trial":
+                Days = 3
+            else:
+                Days = 7
+            if Variation == "Free Trial":
+                Posts = 450
+            elif Variation == "Basic":
+                Posts = 700
+            elif Variation == "Advanced":
+                Posts = 900
+            elif Variation == "Pro":
+                Posts = 1400
+            elif Variation == "God's":
+                Posts = 2100
+            Final_Variable = f"{Message}\n=divider=\n{Posts}\n=divider=\n{Days}\n=divider=\n{Keywords}"
+            return Final_Variable
+        
+        Final_Variable = CreateVariable(Keywords)
+        def UpdateVariables(Text, Names, WhichVariable, REPO):
+            print(Names)
+            Varaibles = WhichVariable.split(",")
+            for Var in Varaibles:
+                print(int(Var) - 1)
+                NAME = Names[int(Var) - 1]
+                headers = {
+                'Accept': 'application/vnd.github+json',
+                'Authorization': f'Bearer {TOKEN}',
+                'X-GitHub-Api-Version': '2022-11-28',
+                'Content-Type': 'application/json',}
+                data = {"value": Text}
+                response = requests.patch(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{NAME}',
+                headers=headers, json=data)
+                print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
+        UpdateVariables(Final_Variable, Names, WhichVar, REPO)
+        print("Webhook triggered!", data)
+
