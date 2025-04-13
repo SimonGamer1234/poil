@@ -7,7 +7,3 @@ services:
     envVars:
       - key: FLASK_ENV
         value: production
-      - key: TOKEN
-        value: your_token_here
-      - key: OWNER
-        value: your_owner_here
