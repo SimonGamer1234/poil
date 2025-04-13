@@ -42,6 +42,7 @@ def run_script():
         page = 1
         while True:
             response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
+            print(response.url)
             print(response.status_code)
             vgd = response.json()
             if 'variables' not in vgd or not vgd['variables']:
