@@ -82,9 +82,18 @@ def run_script():
         return Keywords
     Thing = PrintVariables()
     print("Webhook triggered!", data)
-    return str(Thing), 200  # Using jsonify to ensure proper JSON response
+    response = {
+        "Plan": Plan,
+        "Variation": Variation,
+        "Message": Message,
+        "Keywords": Keywords,
+        "Variables": Thing,
+        "DisMessage": f"Your Choices:\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nMessage: {Message}\n\nPick the variables you want to replace:\n{Thing}",
+    }
+    return jsonify(response), 200  # Using jsonify to ensure proper JSON response
 
-
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=8080)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -93,5 +102,3 @@ def webhook():
     return str(data), 200
 
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8080)
