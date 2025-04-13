@@ -84,5 +84,14 @@ def run_script():
     print("Webhook triggered!", data)
     return str(Thing), 200  # Using jsonify to ensure proper JSON response
 
+
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    data = request.get_json()
+    print("Webhook triggered!", data)
+    return str(data), 200
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
