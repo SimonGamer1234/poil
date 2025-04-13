@@ -72,8 +72,10 @@ def run_script():
             print(Splitted2)
             if len(Splitted1) == 4:
                 Keyword = Splitted1[3]
+                Keywords.append(Keyword)
             elif len(Splitted2) == 4:
                 Keyword = Splitted2[3]
+                Keywords.append(Keyword)
             else:
                 Keyword = "Base Variable"
                 Keywords.append(Keyword)
