@@ -140,14 +140,14 @@ def webhook():
             print(response.status_code)
             vgd = response.json()
             print(vgd)
-            variables = vgd['variables']
-            print(variables)
             if 'variables' not in vgd or not vgd['variables']:
               break
+            variables = vgd['variables']
+            print(variables)
             for v in variables:
-                V_Name = str(v["name"])
+                V_Name = v["name"]
                 if V_Name.startswith("AD"):
-                    V_Names.append(V_Name)
+                    V_Names.append(v["name"])
                     V_Values.append(v["value"])
                 elif V_Name == "SCHEDULER":
                     Scheduler_Value = v["value"]
