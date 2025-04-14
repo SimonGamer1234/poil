@@ -140,6 +140,7 @@ def webhook():
                 V_Name = v["name"]
                 print(V_Name)
             if V_Name.startswith("AD"):
+                print("starts with AD")
                 V_Names.append(V_Name)
                 V_Values.append(v["value"])
             elif V_Name == "SCHEDULER":
