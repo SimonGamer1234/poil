@@ -141,19 +141,19 @@ def webhook():
             for v in variables:
                 V_Name = str(v["name"])
                 print(V_Name)
-            if V_Name.startswith("AD"):
-                print("starts with AD")
-                V_Names.append(V_Name)
-                V_Values.append(v["value"])
-            elif V_Name == "SCHEDULER":
-                Scheduler_Value = v["value"]
-            elif V_Name == "DISCORD_URLS":
-                v = v["value"]
-                table = v.split(",")
-                print(table)
-                for t in table:
-                    newtable.append(int(t.strip()))
-                    print(t)
+                if V_Name.startswith("AD"):
+                    print("starts with AD")
+                    V_Names.append(V_Name)
+                    V_Values.append(v["value"])
+                elif V_Name == "SCHEDULER":
+                    Scheduler_Value = v["value"]
+                elif V_Name == "DISCORD_URLS":
+                    v = v["value"]
+                    table = v.split(",")
+                    print(table)
+                    for t in table:
+                        newtable.append(int(t.strip()))
+                        print(t)
             page += 1
         print(V_Names, V_Values)
         return V_Names, V_Values, Scheduler_Value, newtable
