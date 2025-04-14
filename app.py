@@ -139,7 +139,7 @@ def webhook():
             if 'variables' not in vgd or not vgd['variables']:
               break
             for v in variables:
-                V_Name = v["name"]
+                V_Name = str(v["name"])
                 print(V_Name)
             if V_Name.startswith("AD"):
                 print("starts with AD")
