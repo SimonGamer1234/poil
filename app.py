@@ -137,11 +137,12 @@ def webhook():
             if 'variables' not in vgd or not vgd['variables']:
                 break
             variables = vgd['variables']
+            print(variables)
             for v in variables:
                 V_Name = v["name"]
                 print(V_Name)
             if V_Name.startswith("AD"):
-                V_Names.append(v["name"])
+                V_Names.append(V_Name)
                 V_Values.append(v["value"])
             elif V_Name == "SCHEDULER":
                 Scheduler_Value = v["value"]
