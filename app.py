@@ -108,7 +108,6 @@ if __name__ == '__main__':
 def webhook():
     data = request.get_json()  # Corrected this line
     Variables = data.get("Variables")
-    print(Variables)
     PostedBefore = str(Variables.split(" | ")[0])
     Message = str(Variables.split(" | ")[1])
     Plan = str(Variables.split(" | ")[2])
@@ -146,9 +145,7 @@ def webhook():
               break
             for v in variables:
                 V_Name = str(v["name"])
-                print(V_Name)
                 if V_Name.startswith("AD"):
-                    print("starts with AD")
                     V_Names.append(V_Name)
                     V_Values.append(v["value"])
                 elif V_Name == "SCHEDULER":
@@ -156,12 +153,9 @@ def webhook():
                 elif V_Name == "DISCORD_URLS":
                     v = v["value"]
                     table = v.split(",")
-                    print(table)
                     for t in table:
                         newtable.append(int(t.strip()))
-                        print(t)
             page += 1
-        print(V_Names, V_Values)
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
     if PostedBefore == True:
