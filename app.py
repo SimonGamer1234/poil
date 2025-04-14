@@ -19,11 +19,14 @@ app = Flask(__name__)
 def run_script():
     # Your script logic here (call function, run something, etc.)
     data = request.get_json()  # Corrected this line
-    Plan = data.get("Plan")
-    Variation = data.get("Variation")
-    Keywords = data.get("Keywords")
-    Message = data.get("Message")
-    PostedBefore = data.get("PostBefore")
+    Variables = data.get("Variables")
+    print(Variables)
+    Message = Variables.split("|")[0]
+    Keywords = Variables.split("|")[1]
+    Variation = Variables.split("|")[2]
+    Plan = Variables.split("|")[3]
+    PostedBefore = Variables.split("|")[4]
+
 
     def ChooseREPO():
         if Plan == "Normal":
@@ -103,11 +106,13 @@ if __name__ == '__main__':
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.get_json()  # Corrected this line
-    Plan = data.get("Plan")
-    Variation = data.get("Variation")
-    Keywords = data.get("Keywords")
-    Message = data.get("Message")
-    PostedBefore = data.get("PostBefore")   
+    Variables = data.get("Variables")
+    print(Variables)
+    Message = Variables.split("|")[0]
+    Keywords = Variables.split("|")[1]
+    Variation = Variables.split("|")[2]
+    Plan = Variables.split("|")[3]
+    PostedBefore = Variables.split("|")[4]   
     WhichVar = data.get("WhichVariables")
 
     def ChooseREPO():
@@ -176,7 +181,7 @@ def webhook():
         def SearchForPosts(GuildIDs, Keywords):
             print(GuildIDs)
             totalposts = 0
-            author_ids = [1148657062599983237,841925129323020298, 1285602869638070304, 1303383091468963841]
+            author_ids = [1148657062599983237,841925129323020298, 1285602869638070304, 1303383091468963841, 1338561709228687443]
             for Id in GuildIDs:
                 print(f"KeyWords: {Keywords}")
                 header = {"Authorization":USERTOKEN}
