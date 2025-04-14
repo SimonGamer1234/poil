@@ -133,6 +133,7 @@ def webhook():
         while True:
             response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
             vgd = response.json()
+            print(vgd)
             if 'variables' not in vgd or not vgd['variables']:
                 break
             variables = vgd['variables']
