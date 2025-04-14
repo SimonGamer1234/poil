@@ -19,6 +19,7 @@ app = Flask(__name__)
 def run_script():
     # Your script logic here (call function, run something, etc.)
     data = request.get_json()  # Corrected this line
+    print(data)
     Variables = data.get("Variables")
     print(Variables)
     Message = Variables.split("|")[0]
