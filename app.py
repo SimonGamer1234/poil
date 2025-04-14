@@ -22,11 +22,11 @@ def run_script():
     print(data)
     Variables = data.get("Variables")
     print(Variables)
-    PostedBefore = str(Variables.split("|")[0])
-    Message = str(Variables.split("|")[1])
-    Plan = str(Variables.split("|")[2])
-    Variation = str(Variables.split("|")[3])
-    Keywords = str(Variables.split("|")[4])   
+    PostedBefore = str(Variables.split(" | ")[0])
+    Message = str(Variables.split(" | ")[1])
+    Plan = str(Variables.split(" | ")[2])
+    Variation = str(Variables.split(" | ")[3])
+    Keywords = str(Variables.split(" | ")[4])   
 
 
     def ChooseREPO():
@@ -109,11 +109,11 @@ def webhook():
     data = request.get_json()  # Corrected this line
     Variables = data.get("Variables")
     print(Variables)
-    PostedBefore = str(Variables.split("|")[0])
-    Message = str(Variables.split("|")[1])
-    Plan = str(Variables.split("|")[2])
-    Variation = str(Variables.split("|")[3])
-    Keywords = str(Variables.split("|")[4])   
+    PostedBefore = str(Variables.split(" | ")[0])
+    Message = str(Variables.split(" | ")[1])
+    Plan = str(Variables.split(" | ")[2])
+    Variation = str(Variables.split(" | ")[3])
+    Keywords = str(Variables.split(" | ")[4])     
     WhichVar = data.get("WhichVariables")
 
     def ChooseREPO():
