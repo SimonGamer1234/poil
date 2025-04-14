@@ -137,6 +137,7 @@ def webhook():
         page = 1
         while True:
             response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
+            print(response.status_code)
             vgd = response.json()
             print(vgd)
             variables = vgd['variables']
