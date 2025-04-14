@@ -138,24 +138,29 @@ def webhook():
         while True:
             response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
             vgd = response.json()
-            if 'variables' not in vgd or not vgd['variables']:
-                break
+            print(vgd)
             variables = vgd['variables']
+            print(variables)
+            if 'variables' not in vgd or not vgd['variables']:
+              break
             for v in variables:
-                V_Name = v["name"]
-            if V_Name.startswith("AD"):
-                V_Names.append(v["name"])
-                V_Values.append(v["value"])
-            elif V_Name == "SCHEDULER":
-                Scheduler_Value = v["value"]
-            elif V_Name == "DISCORD_URLS":
-                v = v["value"]
-                table = v.split(",")
-                print(table)
-                for t in table:
-                    newtable.append(int(t.strip()))
-                    print(t)
+                V_Name = str(v["name"])
+                print(V_Name)
+                if V_Name.startswith("AD"):
+                    print("starts with AD")
+                    V_Names.append(V_Name)
+                    V_Values.append(v["value"])
+                elif V_Name == "SCHEDULER":
+                    Scheduler_Value = v["value"]
+                elif V_Name == "DISCORD_URLS":
+                    v = v["value"]
+                    table = v.split(",")
+                    print(table)
+                    for t in table:
+                        newtable.append(int(t.strip()))
+                        print(t)
             page += 1
+        print(V_Names, V_Values)
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
     if PostedBefore == True:
