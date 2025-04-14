@@ -138,6 +138,7 @@ def webhook():
             variables = vgd['variables']
             for v in variables:
                 V_Name = v["name"]
+                print(V_Name)
             if V_Name.startswith("AD"):
                 V_Names.append(v["name"])
                 V_Values.append(v["value"])
@@ -151,6 +152,7 @@ def webhook():
                     newtable.append(int(t.strip()))
                     print(t)
             page += 1
+        print(V_Names)
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
     if PostedBefore == True:
