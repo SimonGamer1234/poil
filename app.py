@@ -53,6 +53,7 @@ def run_script():
             print(response.url)
             print(response.status_code)
             vgd = response.json()
+            print(vgd)
             if 'variables' not in vgd or not vgd['variables']:
               break
             variables = vgd['variables']
@@ -140,6 +141,7 @@ def webhook():
             print(response.url)
             print(response.status_code)
             vgd = response.json()
+            print(vgd)
             if 'variables' not in vgd or not vgd['variables']:
               break
             variables = vgd['variables']
