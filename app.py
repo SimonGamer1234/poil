@@ -70,6 +70,7 @@ def run_script():
                     for t in table:
                         newtable.append(int(t.strip()))
             page += 1
+            print(f"V_Names: {V_Names}")
         return V_Names, V_Values, Scheduler_Value, newtable
     def PrintVariables():
         AdNames, AdValues, No, Ze = LoadVariables(ChooseREPO())
@@ -158,6 +159,7 @@ def webhook():
                     for t in table:
                         newtable.append(int(t.strip()))
             page += 1
+        print(f"V_Names: {V_Names}")
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
     if PostedBefore == True:
