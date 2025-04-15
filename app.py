@@ -58,9 +58,9 @@ def run_script():
               break
             variables = vgd['variables']
             for v in variables:
-                V_Name = v["name"]
+                V_Name = str(v["name"])
                 if V_Name.startswith("AD"):
-                    V_Names.append(v["name"])
+                    V_Names.append(str(v["name"]))
                     V_Values.append(v["value"])
                 elif V_Name == "SCHEDULER":
                     Scheduler_Value = v["value"]
@@ -146,9 +146,9 @@ def webhook():
               break
             variables = vgd['variables']
             for v in variables:
-                V_Name = v["name"]
+                V_Name = str(v["name"])
                 if V_Name.startswith("AD"):
-                    V_Names.append(v["name"])
+                    V_Names.append(str(v["name"]))
                     V_Values.append(v["value"])
                 elif V_Name == "SCHEDULER":
                     Scheduler_Value = v["value"]
