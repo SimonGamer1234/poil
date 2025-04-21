@@ -118,7 +118,7 @@ def webhook():
     Variation = str(Variables.split("<=divid=>")[3])
     Keywords = str(Variables.split("<=divid=>")[4])     
     WhichVar = data.get("WhichVariables")
-    print(f"PostedBefore: {PostedBefore}\nMessage: {Message}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nWhichVar: {WhichVar}")
+    print(f"PostedBefore: {PostedBefore}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nWhichVar: {WhichVar}")
     print(f"Webhook triggered!", data)
 
 
