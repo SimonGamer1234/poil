@@ -26,7 +26,9 @@ def run_script():
     Message = str(Variables.split(" | ")[1])
     Plan = str(Variables.split(" | ")[2])
     Variation = str(Variables.split(" | ")[3])
-    Keywords = str(Variables.split(" | ")[4])   
+    Keywords = str(Variables.split(" | ")[4])
+    print(f"PostedBefore: {PostedBefore}\nMessage: {Message}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}")
+    print(f"Webhook triggered!", data)   
 
 
     def ChooseREPO():
