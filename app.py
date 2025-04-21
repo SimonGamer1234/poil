@@ -111,12 +111,14 @@ def webhook():
     data = request.get_json()  # Corrected this line
     Variables = data.get("Variables")
     PostedBefore = str(Variables.split(" | ")[0])
-    print(f"PostedBefore: {PostedBefore}")
     Message = str(Variables.split(" | ")[1])
     Plan = str(Variables.split(" | ")[2])
     Variation = str(Variables.split(" | ")[3])
     Keywords = str(Variables.split(" | ")[4])     
     WhichVar = data.get("WhichVariables")
+    print(f"PostedBefore: {PostedBefore}\nMessage: {Message}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nWhichVar: {WhichVar}")
+    print(f"Webhook triggered!", data)
+
 
     def ChooseREPO():
         if Plan == "Normal":
