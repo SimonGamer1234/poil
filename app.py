@@ -100,7 +100,7 @@ def run_script():
         "Keywords": Keywords,
         "Variables": Thing,
         "PostedBefore": PostedBefore,
-        "DisMessage": f"Your Choices:\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nMessage: {Message}\n\nPick the variables you want to replace:\n{Thing}",
+        "DisMessage": f"Your Choices:\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\n\nPick the variables you want to replace:\n{Thing}",
     }
     return response, 200  # Using jsonify to ensure proper JSON response
 
