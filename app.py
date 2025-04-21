@@ -97,7 +97,6 @@ def run_script():
     response = {
         "Plan": Plan,
         "Variation": Variation,
-        "Message": Message,
         "Keywords": Keywords,
         "Variables": Thing,
         "PostedBefore": PostedBefore,
