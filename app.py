@@ -19,6 +19,8 @@ app = Flask(__name__)
 def run_script():
     # Your script logic here (call function, run something, etc.)
     data = request.get_json()  # Corrected this line
+    print("Webhook received!")
+    print("Data received:")
     print(data)
     Variables = data.get("Variables")
     PostedBefore = str(Variables.split("<=divid=>")[0])
@@ -106,6 +108,9 @@ if __name__ == '__main__':
 @app.route('/webhook', methods=['POST'])
 def webhook():
     data = request.get_json()  # Corrected this line
+    print("Webhook received!")
+    print("Data received:")
+    print(data)
     Variables = data.get("Variables")
     PostedBefore = str(Variables.split("<=divid=>")[0])
     Message = str(Variables.split("<=divid=>")[1])
@@ -114,7 +119,6 @@ def webhook():
     Keywords = str(Variables.split("<=divid=>")[4])     
     WhichVar = data.get("WhichVariables")
     print(f"PostedBefore: {PostedBefore}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nWhichVar: {WhichVar}")
-    print(f"Webhook triggered!", data)
 
 
     def ChooseREPO():
