@@ -182,7 +182,7 @@ def webhook():
                 else:
                     Errors.append(AdId)
                     IdsWithoutErrors.remove(AdId)
-                print(f"Error with AdvertisingChannel Id: {response.status_code}")
+                    print(f"Error with AdvertisingChannel Id: {response.status_code}")
             print(f"GuildIds: {GuildIds}")
             return GuildIds, IdsWithoutErrors
         GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
