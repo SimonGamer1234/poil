@@ -28,7 +28,6 @@ def run_script():
     Plan = str(Variables.split("<=divid=>")[2])
     Variation = str(Variables.split("<=divid=>")[3])
     Keywords = str(Variables.split("<=divid=>")[4])
-    print(f"PostedBefore: {PostedBefore}\nMessage: {Message}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}")
 
 
     def ChooseREPO():
@@ -78,8 +77,6 @@ def run_script():
         for AdValue in AdValues:
             Splitted1 = AdValue.split("\n=divider=\n")
             Splitted2 = AdValue.split("\r\n=divider=\r\n")
-            print(Splitted1)
-            print(Splitted2)
             if len(Splitted1) == 4:
                 Keyword = Splitted1[3]
                 Keywords.append(Keyword)
@@ -118,7 +115,6 @@ def webhook():
     Variation = str(Variables.split("<=divid=>")[3])
     Keywords = str(Variables.split("<=divid=>")[4])     
     WhichVar = data.get("WhichVariables")
-    print(f"PostedBefore: {PostedBefore}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\nWhichVar: {WhichVar}")
 
 
     def ChooseREPO():
@@ -185,7 +181,6 @@ def webhook():
             return GuildIds, IdsWithoutErrors
         GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
         def SearchForPosts(GuildIDs, Keywords):
-            print(GuildIDs)
             totalposts = 0
             author_ids = [1148657062599983237,841925129323020298, 1285602869638070304, 1303383091468963841, 1338561709228687443]
             for Id in GuildIDs:
