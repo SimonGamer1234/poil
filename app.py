@@ -21,14 +21,12 @@ def run_script():
     data = request.get_json()  # Corrected this line
     print(data)
     Variables = data.get("Variables")
-    print(Variables)
     PostedBefore = str(Variables.split("<=divid=>")[0])
     Message = str(Variables.split("<=divid=>")[1])
     Plan = str(Variables.split("<=divid=>")[2])
     Variation = str(Variables.split("<=divid=>")[3])
     Keywords = str(Variables.split("<=divid=>")[4])
     print(f"PostedBefore: {PostedBefore}\nMessage: {Message}\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}")
-    print(f"Webhook triggered!", data)   
 
 
     def ChooseREPO():
@@ -52,10 +50,8 @@ def run_script():
         page = 1
         while True:
             response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
-            print(response.url)
             print(response.status_code)
             vgd = response.json()
-            print(vgd)
             if 'variables' not in vgd or not vgd['variables']:
               break
             variables = vgd['variables']
@@ -143,10 +139,8 @@ def webhook():
         page = 1
         while True:
             response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
-            print(response.url)
             print(response.status_code)
             vgd = response.json()
-            print(vgd)
             if 'variables' not in vgd or not vgd['variables']:
               break
             variables = vgd['variables']
