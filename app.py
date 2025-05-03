@@ -10,6 +10,7 @@ TOKEN = os.getenv("TOKEN")
 USERTOKEN = os.getenv("USERTOKEN")
 NormalREPO = os.getenv("NormalREPO")
 AviationREPO = os.getenv("AviationREPO")
+BASEVARIABLE = 'BAase Variable'
 
 
 
@@ -23,11 +24,7 @@ def run_script():
     print("Data received:")
     print(data)
     Variables = data.get("Variables")
-    PostedBefore = str(Variables.split("<=divid=>")[0])
-    Message = str(Variables.split("<=divid=>")[1])
-    Plan = str(Variables.split("<=divid=>")[2])
-    Variation = str(Variables.split("<=divid=>")[3])
-    Keywords = str(Variables.split("<=divid=>")[4])
+    Plan = str(Variables.split("<=divid=>")[0])
 
 
     def ChooseREPO():
@@ -90,13 +87,7 @@ def run_script():
     Thing = PrintVariables()
     print("Webhook triggered!", data)
     response = {
-        "Plan": Plan,
-        "Variation": Variation,
-        "Keywords": Keywords,
-        "Variables": Thing,
-        "PostedBefore": PostedBefore,
-        "DisMessage": f"Your Choices:\nPlan: {Plan}\nVariation: {Variation}\nKeywords: {Keywords}\n\nPick the variables you want to replace:\n{Thing}",
-    }
+        "Variables": Thing,}
     return response, 200  # Using jsonify to ensure proper JSON response
 
 if __name__ == '__main__':
@@ -275,3 +266,34 @@ def webhook():
     else:
         print("Something with postedbefore")
     return "Webhook received!", 200  # Using jsonify to ensure proper JSON response
+
+@app.route('/variables', methods=['POST'])
+def variables():
+    data = request.get_json()
+    Variables = data.get("Variables")
+    Repository = str(Variables.split("<=divid=>")[0])
+    WhichVar = str(Variables.split("<=divid=>")[1])
+    def ChooseREPO():
+        if Repository == "Normal":
+            return NormalREPO
+        elif Repository == "Aviation":
+            return AviationREPO
+        else:
+            print("Wrong input")
+            exit()
+    def UpdateVariables(Text, Names, WhichVariable, REPO):
+        print(Names)
+        Varaibles = WhichVariable.split(",")
+        for Var in Varaibles:
+                print(int(Var) - 1)
+                NAME = f"AD_{int(Var)}"
+                headers = {
+                'Accept': 'application/vnd.github+json',
+                'Authorization': f'Bearer {TOKEN}',
+                'X-GitHub-Api-Version': '2022-11-28',
+                'Content-Type': 'application/json',}
+                data = {"value": Text}
+                response = requests.patch(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{NAME}',
+                headers=headers, json=data)
+                print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
+
