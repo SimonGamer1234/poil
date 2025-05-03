@@ -87,7 +87,7 @@ def run_script():
     Thing = PrintVariables()
     print("Webhook triggered!", data)
     response = {
-        "Variables": Thing,}
+        "DisMessage": Thing,}
     return response, 200  # Using jsonify to ensure proper JSON response
 
 if __name__ == '__main__':
