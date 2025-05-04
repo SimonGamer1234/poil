@@ -281,8 +281,7 @@ def variables():
         else:
             print("Wrong input")
             exit()
-    def UpdateVariables(Text, Names, WhichVariable, REPO):
-        print(Names)
+    def UpdateVariables(Text, WhichVariable, REPO):
         Varaibles = WhichVariable.split(",")
         for Var in Varaibles:
                 print(int(Var) - 1)
@@ -296,4 +295,8 @@ def variables():
                 response = requests.patch(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{NAME}',
                 headers=headers, json=data)
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
+    UpdateVariables(BASEVARIABLE, WhichVar, ChooseREPO())
+    print("Webhook triggered!", data)
+    return "Webhook received!", 200
+
 
