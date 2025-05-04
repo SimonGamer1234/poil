@@ -271,6 +271,7 @@ def webhook():
 def variables():
     data = request.get_json()
     Variables = str(data.get("Variables"))
+    print(Variables)
     Repository = str(Variables.split("<=divid=>")[0])
     WhichVar = str(Variables.split("<=divid=>")[1])
     def ChooseREPO():
