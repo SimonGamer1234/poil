@@ -10,9 +10,8 @@ TOKEN = os.getenv("TOKEN")
 USERTOKEN = os.getenv("USERTOKEN")
 NormalREPO = os.getenv("NormalREPO")
 AviationREPO = os.getenv("AviationREPO")
-BASEVARIABLE = 'BAase Variable'
-
-
+BASEVARIABLE = os.getenv("BASEVARIABLE")
+BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
 
 app = Flask(__name__)
 
@@ -330,7 +329,7 @@ def variables():
                 response = requests.patch(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{NAME}',
                 headers=headers, json=data)
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
-    UpdateVariables(BASEVARIABLE, WhichVar, ChooseREPO(), V_Names)
+    UpdateVariables(BaseVariable, WhichVar, ChooseREPO(), V_Names)
     print("Webhook triggered!", data)
     return "Webhook received!", 200
 
