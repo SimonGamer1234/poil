@@ -283,7 +283,7 @@ def variables():
         else:
             print("Wrong input")
             exit()
-    def LoadVariables(ChooseREPO):
+    def LoadVariables(REPO):
         V_Names = []
         V_Values = []
         newtable = []
