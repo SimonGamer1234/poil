@@ -270,7 +270,7 @@ def webhook():
 @app.route('/variables', methods=['POST'])
 def variables():
     data = request.get_json()
-    Variables = data.get("Variables")
+    Variables = str(data.get("Variables"))
     Repository = str(Variables.split("<=divid=>")[0])
     WhichVar = str(Variables.split("<=divid=>")[1])
     def ChooseREPO():
