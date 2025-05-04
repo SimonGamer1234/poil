@@ -283,11 +283,44 @@ def variables():
         else:
             print("Wrong input")
             exit()
-    def UpdateVariables(Text, WhichVariable, REPO):
+    def LoadVariables(ChooseREPO):
+        V_Names = []
+        V_Values = []
+        newtable = []
+        Scheduler_Value = 0
+        headers = {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': f'Bearer {TOKEN}',
+            'X-GitHub-Api-Version': '2022-11-28',
+        }
+        page = 1
+        while True:
+            response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
+            print(response.status_code)
+            vgd = response.json()
+            if 'variables' not in vgd or not vgd['variables']:
+              break
+            variables = vgd['variables']
+            for v in variables:
+                V_Name = str(v["name"])
+                if V_Name.startswith("AD"):
+                    V_Names.append(str(v["name"]))
+                    V_Values.append(v["value"])
+                elif V_Name == "SCHEDULER":
+                    Scheduler_Value = v["value"]
+                elif V_Name == "DISCORD_URLS":
+                    v = v["value"]
+                    table = v.split(",")
+                    for t in table:
+                        newtable.append(int(t.strip()))
+            page += 1
+        print(f"V_Names: {V_Names}")
+        return V_Names, V_Values, Scheduler_Value, newtable
+    V_Names, V_Values, Scheduler_Value, IDS = LoadVariables(ChooseREPO())
+    def UpdateVariables(Text, WhichVariable, REPO, V_Names):
         Varaibles = WhichVariable.split(",")
         for Var in Varaibles:
-                print(int(Var) - 1)
-                NAME = f"AD_{int(Var)}"
+                NAME = V_Names[int(Var) - 1]
                 headers = {
                 'Accept': 'application/vnd.github+json',
                 'Authorization': f'Bearer {TOKEN}',
@@ -297,7 +330,7 @@ def variables():
                 response = requests.patch(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{NAME}',
                 headers=headers, json=data)
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
-    UpdateVariables(BASEVARIABLE, WhichVar, ChooseREPO())
+    UpdateVariables(BASEVARIABLE, WhichVar, ChooseREPO(), V_Names)
     print("Webhook triggered!", data)
     return "Webhook received!", 200
 
