@@ -333,4 +333,6 @@ def variables():
     print("Webhook triggered!", data)
     return "Webhook received!", 200
 
-
+@app.route('/cron', methods=['GET'])
+def cron():
+    return "Cron job is running!"
