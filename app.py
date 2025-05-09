@@ -154,7 +154,7 @@ def webhook():
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
     def CreateMessage(MessageID, ChannelID):
         headers = {
-            'Authorization': BOTTOKEN,
+            'Authorization': f"Bot {BOTTOKEN}",
             'User-Agent': 'DiscordBot (https://example.com, v1)',
             'Content-Type': 'application/json'
         }
