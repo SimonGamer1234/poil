@@ -163,9 +163,7 @@ def webhook():
         if response.status_code == 200:
             message_data = response.json()
             content = message_data.get('content', '')
-            formatted_content = content.replace('\n', '\\n')
-            print("Formatted Message Content:", formatted_content)
-            return formatted_content
+            return content
         else:
             print("Failed to fetch message.")
             print("Status Code:", response.status_code)
