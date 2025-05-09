@@ -248,11 +248,11 @@ def webhook():
         print("Webhook triggered!", data)
     elif str(PostedBefore) == "No":
         def CreateVariable(Keywords):
-            if Variation == "Free Trial":
+            if Variation == "Free":
                 Days = 3
             else:
                 Days = 7
-            if Variation == "Free Trial":
+            if Variation == "Free":
                 Posts = 450
             elif Variation == "Basic":
                 Posts = 700
