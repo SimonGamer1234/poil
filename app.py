@@ -150,7 +150,7 @@ def webhook():
         print(f"V_Names: {V_Names}")
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
-    if str(PostedBefore) == "true":
+    if str(PostedBefore) == "Yes":
         def GetGuildIds(IDS):
             ids = [id.strip() for id in str(IDS).split(",")]
             GuildIds = []
@@ -225,7 +225,7 @@ def webhook():
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
         UpdateVariables(Final_Variable, Names, WhichVar, REPO)
         print("Webhook triggered!", data)
-    elif str(PostedBefore) == "false":
+    elif str(PostedBefore) == "No":
         def CreateVariable(Keywords):
             if Variation == "Free Trial":
                 Days = 3
