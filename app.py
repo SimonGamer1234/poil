@@ -278,11 +278,13 @@ def webhook():
                 response = requests.patch(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{NAME}',
                 headers=headers, json=data)
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
-        UpdateVariables(Final_Variable, Names, WhichVar, REPO)
+                response = response.status_code, response.text
+                return response
+        response = UpdateVariables(Final_Variable, Names, WhichVar, REPO)
         print("Webhook triggered!", data)
     else:
         print("Something with postedbefore")
-    return "Webhook received!", 200  # Using jsonify to ensure proper JSON response
+    return response
 
 @app.route('/variables', methods=['POST'])
 def variables():
