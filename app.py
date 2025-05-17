@@ -102,7 +102,6 @@ def webhook():
     Variables = data.get("Variables")
     PostedBefore = str(Variables.split("<=divid=>")[2])
     MessageID = str(Variables.split("<=divid=>")[1])
-    ChannelID = str(Variables.split("<=divid=>")[5])
     Plan = str(Variables.split("<=divid=>")[0])
     Variation = str(Variables.split("<=divid=>")[3])
     Keywords = str(Variables.split("<=divid=>")[4])     
@@ -152,13 +151,13 @@ def webhook():
         print(f"V_Names: {V_Names}")
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
-    def CreateMessage(MessageID, ChannelID):
+    def CreateMessage(MessageID):
         headers = {
             'Authorization': f"Bot {BOTTOKEN}",
             'User-Agent': 'DiscordBot (https://example.com, v1)',
             'Content-Type': 'application/json'
         }
-        url = f'https://discord.com/api/v10/channels/{ChannelID}/messages/{MessageID}'
+        url = f'https://discord.com/api/v10/channels/1370801657675251843/messages/{MessageID}'
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             message_data = response.json()
@@ -168,7 +167,7 @@ def webhook():
             print("Failed to fetch message.")
             print("Status Code:", response.status_code)
             print("Response:", response.text)
-    Message = CreateMessage(MessageID, ChannelID)
+    Message = CreateMessage(MessageID)
     if str(PostedBefore) == "Yes":
         def GetGuildIds(IDS):
             ids = [id.strip() for id in str(IDS).split(",")]
