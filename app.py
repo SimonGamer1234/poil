@@ -101,12 +101,11 @@ def webhook():
     print(data)
     Variables = data.get("Variables")
     PostedBefore = str(Variables.split("<=divid=>")[2])
-    MessageID = str(Variables.split("<=divid=>")[1])
+    MessageID = int(Variables.split("<=divid=>")[1])
     Plan = str(Variables.split("<=divid=>")[0])
     Variation = str(Variables.split("<=divid=>")[3])
     Keywords = str(Variables.split("<=divid=>")[4])     
     WhichVar = data.get("WhichVariables")
-
 
     def ChooseREPO():
         if Plan == "Normal":
