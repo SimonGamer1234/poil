@@ -277,7 +277,7 @@ def webhook():
                 headers=headers, json=data)
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
                 response = response.status_code, response.text
-                return response
+            return "b"
         response = UpdateVariables(Final_Variable, Names, WhichVar, REPO)
         print("Webhook triggered!", data)
     else:
