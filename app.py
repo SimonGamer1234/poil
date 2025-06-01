@@ -266,7 +266,7 @@ def webhook():
                 Posts = 1400
             elif Variation == "God's":
                 Posts = 2100
-            Final_Variable = f"{Message}\n=divider=\n{Posts}\n=divider=\n{Days}\n=divider=\n{Keywords}"
+            Final_Variable = f"{Message}\n=divider=\n{Posts}\n=divider=\n{Days}\n=divider=\n{Keywords}\n=divider=\n{TicketID}"
             print("Final Variable created:", Final_Variable)
             return Final_Variable
         
