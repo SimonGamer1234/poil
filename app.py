@@ -107,6 +107,7 @@ def webhook():
     WhichVar = data.get("WhichVariables")
 
     def ChooseREPO():
+        print("Choosing repository based on plan")
         if Plan == "Normal":
             return NormalREPO
         elif Plan == "Aviation":
@@ -116,6 +117,8 @@ def webhook():
             exit()
     REPO = ChooseREPO()
     def LoadVariables(REPO):
+        print("Loading variables from GitHub Actions")
+        print(f"Using repository: {REPO}")
         V_Names = []
         V_Values = []
         newtable = []
@@ -168,6 +171,7 @@ def webhook():
     Message = CreateMessage(MessageID)
     if str(PostedBefore) == "Yes":
         def GetGuildIds(IDS):
+            print("Getting Guild IDs from Advertising Channels")
             ids = [id.strip() for id in str(IDS).split(",")]
             GuildIds = []
             IdsWithoutErrors = ids.copy()
@@ -187,6 +191,7 @@ def webhook():
             return GuildIds, IdsWithoutErrors
         GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
         def SearchForPosts(GuildIDs, Keywords):
+            print("Searching for posts with Keywords:", Keywords)
             totalposts = 0
             author_ids = [1148657062599983237,841925129323020298, 1285602869638070304, 1303383091468963841, 1338561709228687443]
             for Id in GuildIDs:
@@ -206,6 +211,7 @@ def webhook():
             return totalposts 
         totalposts = SearchForPosts(GuildIds, Keywords)
         def CreateVariable(totalposts, Keywords):
+            print("Creating variable with totalposts:", totalposts, "and Keywords:", Keywords)
             if Variation == "Free":
                 Days = 3
             else:
@@ -225,7 +231,8 @@ def webhook():
             return Final_Variable
         Final_Variable = CreateVariable(totalposts, Keywords)
         def UpdateVariables(Text, Names, WhichVariable, REPO):
-            print(Names)
+            print("Updating variables with Text:", Text)
+            print("Names of variables:", Names)
             Varaibles = WhichVariable.split(",")
             for Var in Varaibles:
                 print(int(Var) - 1)
@@ -243,6 +250,8 @@ def webhook():
         print("Webhook triggered!", data)
     elif str(PostedBefore) == "No":
         def CreateVariable(Keywords):
+            print("Creating variable with Keywords:", Keywords)
+            
             if Variation == "Free":
                 Days = 3
             else:
@@ -258,11 +267,13 @@ def webhook():
             elif Variation == "God's":
                 Posts = 2100
             Final_Variable = f"{Message}\n=divider=\n{Posts}\n=divider=\n{Days}\n=divider=\n{Keywords}"
+            print("Final Variable created:", Final_Variable)
             return Final_Variable
         
         Final_Variable = CreateVariable(Keywords)
         def UpdateVariables(Text, Names, WhichVariable, REPO):
-            print(Names)
+            print("Updating variables with Text:", Text)
+            print("Names of variables:", Names)
             Varaibles = WhichVariable.split(",")
             for Var in Varaibles:
                 print(int(Var) - 1)
