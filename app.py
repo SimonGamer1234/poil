@@ -23,8 +23,7 @@ def run_script():
     print("Webhook received!")
     print("Data received:")
     print(data)
-    Variables = data.get("Variables")
-    Plan = str(Variables.split("<=divid=>")[0])
+    Plan = str(data.get("Plan"))	
 
 
     def ChooseREPO():
@@ -99,12 +98,12 @@ def webhook():
     print("Webhook received!")
     print("Data received:")
     print(data)
-    Variables = data.get("Variables")
-    PostedBefore = str(Variables.split("<=divid=>")[2])
-    MessageID = int(Variables.split("<=divid=>")[1])
-    Plan = str(Variables.split("<=divid=>")[0])
-    Variation = str(Variables.split("<=divid=>")[3])
-    Keywords = str(Variables.split("<=divid=>")[4])     
+    TicketID = str(data.get("TicketID"))     
+    Plan = str(data.get("Plan"))
+    PostedBefore = str(data.get("PostedBefore"))
+    MessageID = int(data.get("MessageID"))
+    Variation = str(data.get("Variation"))
+    Keywords = str(data.get("Keywords"))    
     WhichVar = data.get("WhichVariables")
 
     def ChooseREPO():
@@ -222,7 +221,7 @@ def webhook():
             elif Variation == "God's":
                 Posts = 2100
             TotalPosts = Posts + int(totalposts)
-            Final_Variable = f"{Message}\n=divider=\n{TotalPosts}\n=divider=\n{Days}\n=divider=\n{Keywords}"
+            Final_Variable = f"{Message}\n=divider=\n{TotalPosts}\n=divider=\n{Days}\n=divider=\n{Keywords}\n=divider=\n{TicketID}"
             return Final_Variable
         Final_Variable = CreateVariable(totalposts, Keywords)
         def UpdateVariables(Text, Names, WhichVariable, REPO):
