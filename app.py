@@ -174,6 +174,7 @@ def webhook():
             print("Status Code:", response.status_code)
             print("Response:", response.text)
     Message = CreateMessage(MessageID)
+
     if str(PostedBefore) == "Yes":
 
         def GetGuildIds(IDS):
@@ -195,6 +196,7 @@ def webhook():
                     print(f"Error with AdvertisingChannel Id: {response.status_code}")
             print(f"GuildIds: {GuildIds}")
             return GuildIds, IdsWithoutErrors
+
         GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
 
         def SearchForPosts(GuildIDs, Keywords):
@@ -216,6 +218,7 @@ def webhook():
                 else:
                     print(f"Error with Guild Id: {Id} with status code: {response.status_code}")
             return totalposts 
+
         totalposts = SearchForPosts(GuildIds, Keywords)
 
         def CreateVariable(totalposts, Keywords):
@@ -237,7 +240,9 @@ def webhook():
             TotalPosts = Posts + int(totalposts)
             Final_Variable = f"{Message}\n=divider=\n{TotalPosts}\n=divider=\n{Days}\n=divider=\n{Keywords}\n=divider=\n{TicketID}"
             return Final_Variable
+
         Final_Variable = CreateVariable(totalposts, Keywords)
+
         def UpdateVariables(Text, Names, WhichVariable, REPO):
             print("Updating variables with Text:", Text)
             print("Names of variables:", Names)
@@ -256,7 +261,9 @@ def webhook():
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
         UpdateVariables(Final_Variable, Names, WhichVar, REPO)
         print("Webhook triggered!", data)
+
     elif str(PostedBefore) == "No":
+
         def CreateVariable(Keywords):
             print("Creating variable with Keywords:", Keywords)
             
@@ -279,6 +286,7 @@ def webhook():
             return Final_Variable
         
         Final_Variable = CreateVariable(Keywords)
+
         def UpdateVariables(Text, Names, WhichVariable, REPO):
             print("Updating variables with Text:", Text)
             print("Names of variables:", Names)
@@ -297,6 +305,7 @@ def webhook():
                 print(f" Updating status code: {response.status_code}, Updating text: {response.text}")
                 response = response.status_code, response.text
             return "b"
+
         response = UpdateVariables(Final_Variable, Names, WhichVar, REPO)
         print("Webhook triggered!", data)
     else:
