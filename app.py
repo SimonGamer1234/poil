@@ -75,10 +75,10 @@ def run_script():
         for AdValue in AdValues:
             Splitted1 = AdValue.split("\n=divider=\n")
             Splitted2 = AdValue.split("\r\n=divider=\r\n")
-            if len(Splitted1) == 4:
+            if len(Splitted1) == 5:
                 Keyword = Splitted1[3]
                 Keywords.append(Keyword)
-            elif len(Splitted2) == 4:
+            elif len(Splitted2) == 5:
                 Keyword = Splitted2[3]
                 Keywords.append(Keyword)
             else:
