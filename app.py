@@ -34,6 +34,7 @@ def run_script():
         else:
             print("Wrong input")
             exit()    
+
     def LoadVariables(REPO):
         V_Names = []
         V_Values = []
@@ -67,6 +68,7 @@ def run_script():
             page += 1
             print(f"V_Names: {V_Names}")
         return V_Names, V_Values, Scheduler_Value, newtable
+
     def PrintVariables():
         AdNames, AdValues, No, Ze = LoadVariables(ChooseREPO())
         Keywords = []
@@ -83,6 +85,7 @@ def run_script():
                 Keyword = "Base Variable"
                 Keywords.append(Keyword)
         return Keywords
+
     Thing = PrintVariables()
     print("Webhook triggered!", data)
     response = {
@@ -116,6 +119,7 @@ def webhook():
             print("Wrong input")
             exit()
     REPO = ChooseREPO()
+
     def LoadVariables(REPO):
         print("Loading variables from GitHub Actions")
         print(f"Using repository: {REPO}")
@@ -152,6 +156,7 @@ def webhook():
         print(f"V_Names: {V_Names}")
         return V_Names, V_Values, Scheduler_Value, newtable
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
+
     def CreateMessage(MessageID):
         headers = {
             'Authorization': f"Bot {BOTTOKEN}",
@@ -170,6 +175,7 @@ def webhook():
             print("Response:", response.text)
     Message = CreateMessage(MessageID)
     if str(PostedBefore) == "Yes":
+
         def GetGuildIds(IDS):
             print("Getting Guild IDs from Advertising Channels")
             ids = [id.strip() for id in str(IDS).split(",")]
@@ -190,6 +196,7 @@ def webhook():
             print(f"GuildIds: {GuildIds}")
             return GuildIds, IdsWithoutErrors
         GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
+
         def SearchForPosts(GuildIDs, Keywords):
             print("Searching for posts with Keywords:", Keywords)
             totalposts = 0
@@ -210,6 +217,7 @@ def webhook():
                     print(f"Error with Guild Id: {Id} with status code: {response.status_code}")
             return totalposts 
         totalposts = SearchForPosts(GuildIds, Keywords)
+
         def CreateVariable(totalposts, Keywords):
             print("Creating variable with totalposts:", totalposts, "and Keywords:", Keywords)
             if Variation == "Free":
