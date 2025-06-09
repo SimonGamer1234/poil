@@ -169,6 +169,10 @@ def webhook():
             message_data = response.json()
             content = message_data.get('content', '')
             return content
+        elif response.status_code == 429:
+            data = response.json()
+            retry_after = data.get("retry_after", 1)
+            print(f"[429] Rate limited. Retrying after {retry_after} seconds...")
         else:
             print("Failed to fetch message.")
             print("Status Code:", response.status_code)
