@@ -158,8 +158,11 @@ def webhook():
         if response.status_code == 200:
             data = response.json()
             print("Message Content:", data.get("content"))
+            return data.get("content")
         else:
             print(f"Failed to fetch message: {response.status_code} - {response.text}")
+            return BASEVARIABLE
+        
     
 
 
