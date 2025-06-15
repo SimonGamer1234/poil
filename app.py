@@ -158,25 +158,21 @@ def webhook():
     Names, Values, Scheduler_Value, IDS = LoadVariables(REPO)
 
     def CreateMessage(MessageID):
+        url = f"https://discord.com/api/v10/channels/1370801657675251843/messages/{MessageID}"
+
         headers = {
-            'Authorization': f"Bot {BOTTOKEN}",
-            'User-Agent': 'DiscordBot (https://example.com, v1)',
-            'Content-Type': 'application/json'
+         "Authorization": f"Bot {BOTTOKEN}",
+         "Content-Type": "application/json"
         }
-        url = f'https://discord.com/api/v10/channels/1370801657675251843/messages/{MessageID}'
+
         response = requests.get(url, headers=headers)
+
         if response.status_code == 200:
-            message_data = response.json()
-            content = message_data.get('content', '')
-            return content
-        elif response.status_code == 429:
             data = response.json()
-            retry_after = data.get("retry_after", 1)
-            print(f"[429] Rate limited. Retrying after {retry_after} seconds...")
+            print("Message Content:", data.get("content"))
         else:
-            print("Failed to fetch message.")
-            print("Status Code:", response.status_code)
-            print("Response:", response.text)
+            print(f"Failed to fetch message: {response.status_code} - {response.text}")
+    
     Message = CreateMessage(MessageID)
 
     if str(PostedBefore) == "Yes":
