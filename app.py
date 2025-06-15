@@ -287,16 +287,14 @@ def webhook():
             GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
             totalposts = SearchForPosts(GuildIds, Keywords)         
             Final_Variable = CreateVariable(totalposts, Keywords, Message)
-            UpdateVariables(Final_Variable, V_Names, WhichVar, REPO)
 
         elif str(PostedBefore) == " No":
             Final_Variable = CreateVariable(0, Keywords, Message)
-            UpdateVariables(Final_Variable, V_Names, WhichVar, REPO)
-
+            
         else:
             print("Something with postedbefore")
         response = UpdateVariables(Final_Variable, V_Names, WhichVar, REPO)
-        
+
         return response
     Main()
     
