@@ -97,19 +97,9 @@ if __name__ == '__main__':
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    data = request.get_json()  # Corrected this line
-    print("Webhook received!")
-    print("Data received:")
-    print(data)
-    TicketID = str(data.get("TicketID"))     
-    Plan = str(data.get("Plan"))
-    PostedBefore = str(data.get("PostedBefore"))
-    MessageID = int(data.get("MessageID"))
-    Variation = str(data.get("Variation"))
-    Keywords = str(data.get("Keywords"))    
-    WhichVar = data.get("WhichVariables")
+    
 
-    def ChooseREPO():
+    def ChooseREPO(Plan):
         print("Choosing repository based on plan")
         if Plan == "Normal":
             return NormalREPO
@@ -215,7 +205,7 @@ def webhook():
         return totalposts 
 
 
-    def CreateVariable(totalposts, Keywords, Message):
+    def CreateVariable(totalposts, Keywords, Message, Variation, TicketID):
         print("Creating variable with totalposts:", totalposts, "and Keywords:", Keywords)
         if Variation == "Free":
             Days = 3
@@ -275,9 +265,20 @@ def webhook():
     
     
     def Main():
-        REPO = ChooseREPO()
+        data = request.get_json()  # Corrected this line
+        print("Webhook received!")
+        print("Data received:")
+        print(data)
+        TicketID = str(data.get("TicketID"))     
+        Plan = str(data.get("Plan"))
+        PostedBefore = str(data.get("PostedBefore"))
+        MessageID = int(data.get("MessageID"))
+        Variation = str(data.get("Variation"))
+        Keywords = str(data.get("Keywords"))    
+        WhichVar = data.get("WhichVariables")
+        REPO = ChooseREPO(Plan)
         V_Names, V_Values, Scheduler_Value, IDS = LoadVariables(REPO)
-        Message = CreateMessage(MessageID)
+        Message = CreateMessage(MessageID, )
         print("V_Names:", V_Names)
         print("V_Values:", V_Values)
         print("Scheduler_Value:", Scheduler_Value)
@@ -286,10 +287,10 @@ def webhook():
         if str(PostedBefore) == "Yes":
             GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
             totalposts = SearchForPosts(GuildIds, Keywords)         
-            Final_Variable = CreateVariable(totalposts, Keywords, Message)
+            Final_Variable = CreateVariable(totalposts, Keywords, Message, Variation, TicketID)
 
         elif str(PostedBefore) == " No":
-            Final_Variable = CreateVariable(0, Keywords, Message)
+            Final_Variable = CreateVariable(0, Keywords, Message, Variation, TicketID)
             
         else:
             print("Something with postedbefore")
