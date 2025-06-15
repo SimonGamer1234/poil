@@ -289,7 +289,7 @@ def webhook():
             totalposts = SearchForPosts(GuildIds, Keywords)         
             Final_Variable = CreateVariable(totalposts, Keywords, Message, Variation, TicketID)
 
-        elif str(PostedBefore) == " No":
+        elif str(PostedBefore) == "No":
             Final_Variable = CreateVariable(0, Keywords, Message, Variation, TicketID)
             
         else:
