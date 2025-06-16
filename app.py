@@ -300,7 +300,9 @@ def webhook():
         response = UpdateVariables(Final_Variable, V_Names, WhichVar, REPO)
 
         return response
-    Main()
+    response = Main()
+    return response 
+
     
 
 
