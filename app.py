@@ -12,7 +12,7 @@ USERTOKEN = os.getenv("USERTOKEN")
 NormalREPO = os.getenv("NormalREPO")
 AviationREPO = os.getenv("AviationREPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
-BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
+BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
 
 app = Flask(__name__)
 
