@@ -101,10 +101,10 @@ def webhook():
                 'Authorization': f'Bearer {TOKEN}',
                 'X-GitHub-Api-Version': '2022-11-28',
             }
-            page = 1
             response = requests.get(url, headers=headers)
             data = response.json()
             value = data.get('value',None)
+            print(f"Value of {VariableName}: {value}")
             variables1 = value.split("\n\n++THESPLITTER++\n\n")
             variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n")
             if len(variables1) > 1:
