@@ -227,7 +227,7 @@ def webhook():
         for Var in Varaibles:
             Values[int(Var) - 1] = Text
         print("Updated Values:", Values)
-        return Values.join("\n\n++THESPLITTER++\n\n")
+        return "\n\n++THESPLITTER++\n\n".join(Values)
 
     def UpdateVariables(VariableName, Text):
         url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
@@ -322,7 +322,7 @@ def variables():
         Varaibles = WhichVariable.split(",")
         for Var in Varaibles:
             Values[int(Var) - 1] = BaseVariable
-        return Values.join("\n\n++THESPLITTER++\n\n")
+        return "\n\n++THESPLITTER++\n\n".join(Values)
     
     def UpdateVariables(VariableName, Text):
         url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
