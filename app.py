@@ -46,7 +46,15 @@ def run_script():
         response = requests.get(url, headers=headers)
         data = response.json()
         value = data.get('value',None)
-        variables = value.split("\n\n++THESPLITTER++\n\n")
+        variables1 = value.split("\n\n++THESPLITTER++\n\n")
+        variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n")
+        if len(variables1) > 1:
+            variables = variables1
+        elif len(variables2) > 1:
+            variables = variables2
+        else:
+            print("No variables found")
+            return []
         return variables
 
     def PrintVariables(Values):
