@@ -9,8 +9,7 @@ OWNER = os.getenv("OWNER")
 TOKEN = os.getenv("TOKEN")
 BOTTOKEN = os.getenv("BOTTOKEN")
 USERTOKEN = os.getenv("USERTOKEN")
-NormalREPO = os.getenv("NormalREPO")
-AviationREPO = os.getenv("AviationREPO")
+REPO = os.getenv("NormalREPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
 BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
 
@@ -25,68 +24,51 @@ def run_script():
     print(data)
     Plan = str(data.get("Plan"))	
 
-
-    def ChooseREPO():
+    def SetVariables(Plan):
         if Plan == "Normal":
-            return NormalREPO
+            return "NORMAL_ADS"
         elif Plan == "Aviation":
-            return AviationREPO
-        else:
-            print("Wrong input")
-            exit()    
+            return "AVIATION_ADS"
+        
 
-    def LoadVariables(REPO):
+    def LoadVariables(VariableName):
         V_Names = []
         V_Values = []
         newtable = []
         Scheduler_Value = 0
+        url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
         headers = {
             'Accept': 'application/vnd.github+json',
             'Authorization': f'Bearer {TOKEN}',
             'X-GitHub-Api-Version': '2022-11-28',
         }
         page = 1
-        while True:
-            response = requests.get(f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables?page={page}&per_page=100', headers=headers)
-            print(response.status_code)
-            vgd = response.json()
-            if 'variables' not in vgd or not vgd['variables']:
-              break
-            variables = vgd['variables']
-            for v in variables:
-                V_Name = str(v["name"])
-                if V_Name.startswith("AD"):
-                    V_Names.append(str(v["name"]))
-                    V_Values.append(v["value"])
-                elif V_Name == "SCHEDULER":
-                    Scheduler_Value = v["value"]
-                elif V_Name == "DISCORD_URLS":
-                    v = v["value"]
-                    table = v.split(",")
-                    for t in table:
-                        newtable.append(int(t.strip()))
-            page += 1
-            print(f"V_Names: {V_Names}")
-        return V_Names, V_Values, Scheduler_Value, newtable
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        value = data.get('value',None)
+        variables = value.split("\n\n++THESPLITTER++\n\n")
+        return variables
 
-    def PrintVariables():
-        AdNames, AdValues, No, Ze = LoadVariables(ChooseREPO())
+    def PrintVariables(Values):
         Keywords = []
+        n = 0
         for AdValue in AdValues:
+            n += 1
             Splitted1 = AdValue.split("\n=divider=\n")
             Splitted2 = AdValue.split("\r\n=divider=\r\n")
             if len(Splitted1) == 5:
                 Keyword = Splitted1[3]
-                Keywords.append(Keyword)
+                Keywords.append(f"{n}. {Keyword}\n")
             elif len(Splitted2) == 5:
                 Keyword = Splitted2[3]
-                Keywords.append(Keyword)
+                Keywords.append(f"{n}. {Keyword}\n")
             else:
                 Keyword = "Base Variable"
-                Keywords.append(Keyword)
+                Keywords.append(f"{n}. {Keyword}\n")
         return Keywords
-
-    Thing = PrintVariables()
+    VariableName = SetVariables(Plan)
+    AdValues = LoadVariables(VariableName)
+    Thing = PrintVariables(AdValues)
     print("Webhook triggered!", data)
     response = {
         "DisMessage": Thing,}
