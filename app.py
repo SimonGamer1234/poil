@@ -257,6 +257,7 @@ def webhook():
         VariableName = SetVariables(Plan)
         Values, IDS = LoadVariables(VariableName)
         Message = CreateMessage(MessageID)
+        print(f"Values: {Values}")
 
 
         if str(PostedBefore) == "Yes":
