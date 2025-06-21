@@ -113,7 +113,7 @@ def webhook():
                 variables = variables2
             else:
                 print("No variables found")
-                return variables
+            return variables
         def LoadIDS(VariableName):
             url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
             headers = {
