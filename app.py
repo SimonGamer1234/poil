@@ -11,7 +11,7 @@ BOTTOKEN = os.getenv("BOTTOKEN")
 USERTOKEN = os.getenv("USERTOKEN")
 REPO = os.getenv("NormalREPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
-BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
+BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\n1384073122784739370"
 
 app = Flask(__name__)
 
@@ -282,7 +282,9 @@ def webhook():
         response = UpdateVariables(Final_Variable, V_Names, WhichVar, REPO)
 
         return response
-    Main()
+    response = Main()
+    return response 
+
     
 
 
