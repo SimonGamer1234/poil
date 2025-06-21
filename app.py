@@ -52,7 +52,7 @@ def run_script():
     def PrintVariables(Values):
         Keywords = []
         n = 0
-        for AdValue in AdValues:
+        for AdValue in Values:
             n += 1
             Splitted1 = AdValue.split("\n=divider=\n")
             Splitted2 = AdValue.split("\r\n=divider=\r\n")
