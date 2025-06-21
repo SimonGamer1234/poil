@@ -52,6 +52,7 @@ def run_script():
     def PrintVariables(Values):
         Keywords = []
         n = 0
+        print(Values)
         for AdValue in Values:
             n += 1
             Splitted1 = AdValue.split("\n=divider=\n")
@@ -65,6 +66,7 @@ def run_script():
             else:
                 Keyword = "Base Variable"
                 Keywords.append(f"{n}. {Keyword}\n")
+            print(Keywords)
         return Keywords
     VariableName = SetVariables(Plan)
     AdValues = LoadVariables(VariableName)
