@@ -109,11 +109,13 @@ def webhook():
             variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n")
             if len(variables1) > 1:
                 variables = variables1
+                return variables
             elif len(variables2) > 1:
                 variables = variables2
+                return variables
             else:
                 print("No variables found")
-            return variables
+                return []
         def LoadIDS(VariableName):
             url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
             headers = {
