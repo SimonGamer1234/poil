@@ -308,7 +308,6 @@ def variables():
             'Authorization': f'Bearer {TOKEN}',
             'X-GitHub-Api-Version': '2022-11-28',
         }
-        page = 1
         response = requests.get(url, headers=headers)
         data = response.json()
         value = data.get('value',None)
