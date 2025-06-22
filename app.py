@@ -240,6 +240,12 @@ def webhook():
         payload = {
             'value': Text
         }
+        response = requests.patch(url, headers=headers, json=payload)
+        if response.status_code == 200:
+            print("Variables updated successfully")
+        else:
+            print(f"Failed to update variables: {response.status_code} - {response.text}")
+            
         return "b"
 
     
