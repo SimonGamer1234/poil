@@ -9,7 +9,7 @@ OWNER = os.getenv("OWNER")
 TOKEN = os.getenv("TOKEN")
 BOTTOKEN = os.getenv("BOTTOKEN")
 USERTOKEN = os.getenv("USERTOKEN")
-REPO = os.getenv("NormalREPO")
+REPO = os.getenv("REPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
 BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\n1384073122784739370"
 
@@ -38,7 +38,6 @@ def run_script():
             'Authorization': f'Bearer {TOKEN}',
             'X-GitHub-Api-Version': '2022-11-28',
         }
-        page = 1
         response = requests.get(url, headers=headers)
         data = response.json()
         value = data.get('value',None)
