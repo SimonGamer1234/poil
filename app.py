@@ -201,21 +201,19 @@ def webhook():
     def CreateValue(totalposts, Keywords, Message, Variation, TicketID):
         print("Creating variable with totalposts:", totalposts, "and Keywords:", Keywords)
         if Variation == "Free":
-            Days = 3
-        else:
-            Days = 7
-        if Variation == "Free":
-            Posts = 450
+            Postings = 9
         elif Variation == "Basic":
-            Posts = 700
+            Postings = 14
         elif Variation == "Advanced":
-            Posts = 900
+            Postings = 21
         elif Variation == "Pro":
-            Posts = 1400
-        elif Variation == "God's":
-            Posts = 2100
-        TotalPosts = Posts + int(totalposts)
-        Final_Variable = f"{Message}\n=divider=\n{TotalPosts}\n=divider=\n{Days}\n=divider=\n{Keywords}\n=divider=\n{TicketID}"
+            Postings = 28
+        elif Variation == "God's": 
+            Postings = 42
+        else:
+            print("Something went wrong with Variation")    
+        totalposts = totalposts + (Postings * 50)
+        Final_Variable = f"{Message}\n=divider=\n{Variation}\n=divider=\n{totalposts}\n=divider=\n{Postings}\n=divider=\n{Keywords}\n=divider=\n{TicketID}"
         return Final_Variable
 
 
@@ -311,7 +309,7 @@ def variables():
         data = response.json()
         value = data.get('value',None)
         variables1 = value.split("\n\n++THESPLITTER++\n\n")
-        variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n")
+        variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n\r\n")
         if len(variables1) > 1:
             variables = variables1
         elif len(variables2) > 1:
