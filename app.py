@@ -104,8 +104,8 @@ def webhook():
             data = response.json()
             value = data.get('value',None)
             print(f"Value of {VariableName}: {value}")
-            variables1 = value.split("\n\n++THESPLITTER++\n\n")
-            variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n")
+            variables1 = value.split("\n\n++SPLITTER++\n\n")
+            variables2 = value.split("\r\n\r\n++SPLITTER++\r\n")
             if len(variables1) > 1:
                 variables = variables1
                 return variables
@@ -224,7 +224,7 @@ def webhook():
         for Var in Varaibles:
             Values[int(Var) - 1] = Text
         print("Updated Values:", Values)
-        return "\n\n++THESPLITTER++\n\n".join(Values)
+        return "\n\n++SPLITTER++\n\n".join(Values)
 
     def UpdateVariables(VariableName, Text):
         url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
@@ -308,8 +308,8 @@ def variables():
         response = requests.get(url, headers=headers)
         data = response.json()
         value = data.get('value',None)
-        variables1 = value.split("\n\n++THESPLITTER++\n\n")
-        variables2 = value.split("\r\n\r\n++THESPLITTER++\r\n\r\n")
+        variables1 = value.split("\n\n++SPLITTER++\n\n")
+        variables2 = value.split("\r\n\r\n++SPLITTER++\r\n\r\n")
         if len(variables1) > 1:
             variables = variables1
         elif len(variables2) > 1:
@@ -324,7 +324,7 @@ def variables():
         Varaibles = WhichVariable.split(",")
         for Var in Varaibles:
             Values[int(Var) - 1] = BaseVariable
-        return "\n\n++THESPLITTER++\n\n".join(Values)
+        return "\n\n++SPLITTER++\n\n".join(Values)
     
     def UpdateVariables(VariableName, Text):
         url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
