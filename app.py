@@ -292,7 +292,7 @@ def webhook():
 @app.route('/variables', methods=['POST'])
 def variables():
     data = request.get_json()
-    Plan = str(data.get("Repository"))
+    Plan = str(data.get("Plan"))
     WhichVar = str(data.get("WhichVariables"))
     def SetVariables(Plan):
         if Plan == "Normal":
