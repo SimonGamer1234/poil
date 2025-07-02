@@ -5,12 +5,14 @@ import json
 import time
 import random
 
-OWNER = os.getenv("OWNER")
+
 TOKEN = os.getenv("TOKEN")
 BOTTOKEN = os.getenv("BOTTOKEN")
 USERTOKEN = os.getenv("USERTOKEN")
 REPO = os.getenv("REPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
+REPOSITORY = os.getenv("GITHUB_REPOSITORY")
+OWNER, REPO = REPOSITORY.split("/")
 BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\n1384073122784739370"
 
 app = Flask(__name__)
