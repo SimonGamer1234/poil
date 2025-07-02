@@ -306,7 +306,9 @@ def variables():
             'X-GitHub-Api-Version': '2022-11-28',
         }
         response = requests.get(url, headers=headers)
+        print(f"Response status code: {response.status_code}")
         data = response.json()
+        print(f"Data received: {data}")
         value = data.get('value')
         variables1 = value.split("\n\n++SPLITTER++\n\n")
         variables2 = value.split("\r\n\r\n++SPLITTER++\r\n\r\n")
