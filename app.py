@@ -307,7 +307,7 @@ def variables():
         }
         response = requests.get(url, headers=headers)
         data = response.json()
-        value = data.get('value',None)
+        value = data.get('value')
         variables1 = value.split("\n\n++SPLITTER++\n\n")
         variables2 = value.split("\r\n\r\n++SPLITTER++\r\n\r\n")
         if len(variables1) > 1:
