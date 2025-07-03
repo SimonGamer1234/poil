@@ -13,8 +13,7 @@ REPO = os.getenv("REPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
 OWNER = "SimonGamer1234"
 REPO = "ms"
-BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\n1384073122784739370"
-
+BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
 app = Flask(__name__)
 
 @app.route('/run', methods=['POST'])
