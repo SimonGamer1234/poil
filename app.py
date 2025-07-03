@@ -325,12 +325,14 @@ def variables():
         return variables
     
     def CreateValue(Values,WhichVariable):
+        print("creating value")
         Varaibles = WhichVariable.split(",")
         for Var in Varaibles:
             Values[int(Var) - 1] = BaseVariable
         return "\n\n++SPLITTER++\n\n".join(Values)
     
     def UpdateVariables(VariableName, Text):
+        print("updating vars")
         url = f'https://api.github.com/repos/{OWNER}/{REPO}/actions/variables/{VariableName}'
         headers = {
             'Accept': 'application/vnd.github+json',
@@ -342,6 +344,7 @@ def variables():
             'value': Text
         }
         response = requests.patch(url, headers=headers, json=payload)
+        print(response.status_code)
         if response.status_code == 200:
             print("Variables updated successfully")
         else:
