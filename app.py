@@ -321,7 +321,6 @@ def variables():
         else:
             print("No variables found")
             return []
-        variables = LoadVariables(VariableName)
         return variables
     
     def CreateValue(Values,WhichVariable):
