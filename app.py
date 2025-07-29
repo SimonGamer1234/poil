@@ -138,6 +138,7 @@ def webhook():
 
     def CreateMessage(MessageID):
         url = f"https://discord.com/api/v10/channels/1370801657675251843/messages/{MessageID}"
+        print(f"Fetching message from URL: {url}")
 
         headers = {
          "Authorization": f"Bot {BOTTOKEN}",
