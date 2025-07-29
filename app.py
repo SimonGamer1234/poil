@@ -266,13 +266,13 @@ def webhook():
         print(f"Values: {Values}")
 
 
-        if str(PostedBefore) == "True":
+        if str(PostedBefore) == "true":
             GuildIds, IdsWithoutErrors = GetGuildIds(IDS)
             totalposts = SearchForPosts(GuildIds, Keywords)         
             Final_Variable = CreateValue(totalposts, Keywords, Message, Variation, TicketID)
             Final_Variable = CreateVariable(Final_Variable, Values, WhichVar)
 
-        elif str(PostedBefore) == "False":
+        elif str(PostedBefore) == "false":
             Final_Variable = CreateValue(0, Keywords, Message, Variation, TicketID)
             Final_Variable = CreateVariable(Final_Variable, Values, WhichVar)
             
