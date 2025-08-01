@@ -13,6 +13,7 @@ REPO = os.getenv("REPO")
 BASEVARIABLE = os.getenv("BASEVARIABLE")
 OWNER = "SimonGamer1234"
 REPO = "ms"
+NOTIONKEY = os.getenv("NOTIONKEY")
 BaseVariable = f"{BASEVARIABLE}\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable\n=divider=\nBase_Variable"
 app = Flask(__name__)
 
@@ -85,13 +86,12 @@ if __name__ == '__main__':
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    
 
     def SetVariables(Plan):
         if Plan == "Normal":
-            return "NORMAL_ADS"
+            return "NORMAL_ADS", "2420bcea8f408017a788f21259365a1a"
         elif Plan == "Aviation":
-            return "AVIATION_ADS"
+            return "AVIATION_ADS", "2420bcea8f408061b407fcb54a297b27"
 
     def LoadVariables(VariableName):
         def LoadVariables(VariableName):
@@ -247,8 +247,54 @@ def webhook():
 
         return "b"
 
-    
-    
+    def EditNotionMenu(Keywords, WhichVar, DatabaseID):
+        WhichVar = WhichVar.split(",")
+        for Var in WhichVar:
+            headers = {
+                'Authorization': f"Bearer {NOTIONKEY}",
+                'Notion-Version': '2022-06-28',
+                'Content-Type': 'application/json',
+            }
+
+            json = {
+                "sorts": [
+                {
+                    "property": "Name",
+                    "direction": "ascending"
+                }, 
+                ],
+            }
+            response1 = requests.post(
+                'https://api.notion.com/v1/databases/2420bcea8f408061b407fcb54a297b27/query',
+                headers=headers, json=json
+            )
+
+            data = response1.json()
+            results = data.get('results', [])
+            object = results[Var-1]
+            properties = object.get('properties', {})
+            newname = f"{Var} | {Keywords}"
+            properties['Name']['title'][0]['text']['content'] = newname
+
+            # Update the object with the new name
+            update_url = f"https://api.notion.com/v1/pages/{object['id']}"
+            json = {
+                'properties': {
+                    'Name': {
+                        'title': [
+                            {
+                                'text': {
+                                    'content': newname
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+            response2 = requests.patch(update_url, headers=headers, json=json)
+            if response2.status_code or response1.status_code != 200:
+                print("PROBLEM WITH NOTION")
+
     def Main():
         data = request.get_json()  # Corrected this line
         print("Webhook received!")
@@ -261,7 +307,7 @@ def webhook():
         Variation = str(data.get("Variation"))
         Keywords = str(data.get("Keywords"))    
         WhichVar = data.get("WhichVariables")
-        VariableName = SetVariables(Plan)
+        VariableName, NotionDatabaseID = SetVariables(Plan)
         Values, IDS = LoadVariables(VariableName)
         Message = CreateMessage(MessageID)
         print(f"Values: {Values}")
@@ -272,10 +318,12 @@ def webhook():
             totalposts = SearchForPosts(GuildIds, Keywords)         
             Final_Variable = CreateValue(totalposts, Keywords, Message, Variation, TicketID)
             Final_Variable = CreateVariable(Final_Variable, Values, WhichVar)
+            EditNotionMenu(Keywords, WhichVar, NotionDatabaseID)
 
         elif str(PostedBefore) == "false":
             Final_Variable = CreateValue(0, Keywords, Message, Variation, TicketID)
             Final_Variable = CreateVariable(Final_Variable, Values, WhichVar)
+            EditNotionMenu(Keywords, WhichVar, NotionDatabaseID)
             
         else:
             print("Something with postedbefore")
