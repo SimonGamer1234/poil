@@ -250,6 +250,7 @@ def webhook():
     def EditNotionMenu(Keywords, WhichVar, DatabaseID):
         WhichVar = WhichVar.split(",")
         for Var in WhichVar:
+            Var = int(Var.strip())
             headers = {
                 'Authorization': f"Bearer {NOTIONKEY}",
                 'Notion-Version': '2022-06-28',
@@ -265,7 +266,7 @@ def webhook():
                 ],
             }
             response1 = requests.post(
-                'https://api.notion.com/v1/databases/2420bcea8f408061b407fcb54a297b27/query',
+                f'https://api.notion.com/v1/databases/{DatabaseID}/query',
                 headers=headers, json=json
             )
 
