@@ -293,7 +293,7 @@ def webhook():
                 }
             }
             response2 = requests.patch(update_url, headers=headers, json=json)
-            if response2.status_code or response1.status_code != 200:
+            if not response2.status_code or response1.status_code == 200:
                 print("PROBLEM WITH NOTION")
                 print(response2.status_code, response1.status_code)
 
